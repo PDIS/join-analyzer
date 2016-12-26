@@ -1,0 +1,7 @@
+<h4>請選擇要分析的檔案：</h4>
+<input type="file" (change)="onChange($event)"/>
+<hr>
+<h4>檔案預覽:</h4>
+<div *ngFor="let line of preview">
+    {{line}}
+</div>
