@@ -11,6 +11,8 @@ import { WordSegmentComponent } from './comment-analysis/word-segment/word-segme
 import { WordCloudComponent } from './comment-analysis/word-cloud/word-cloud.component';
 import { CommentAnalysisComponent } from './comment-analysis/comment-analysis.component';
 import { SelectFileComponent } from './comment-analysis/select-file/select-file.component';
+import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { SelectFileComponent } from './comment-analysis/select-file/select-file.
     WordSegmentComponent,
     WordCloudComponent,
     CommentAnalysisComponent,
-    SelectFileComponent
+    SelectFileComponent,
+    BarChartComponent
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     FormsModule,
     HttpModule,

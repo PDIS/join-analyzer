@@ -10,7 +10,7 @@
         <a href="#select" aria-controls="select" role="tab" data-toggle="tab">1.資料選擇</a>
       </li>
       <li role="presentation">
-        <a href="#clean" aria-controls="clean" role="tab" data-toggle="tab">2.雜訊處理</a>
+        <a href="#clean" aria-controls="clean" role="tab" data-toggle="tab">2.基本統計</a>
       </li>
       <li role="presentation">
         <a href="#segment" aria-controls="segment" role="tab" data-toggle="tab">3.斷詞處理</a>
@@ -25,7 +25,7 @@
         <app-select-file (getFileContent)="getRawFileContent($event)"></app-select-file>
       </div>
       <div role="tabpanel" class="tab-pane" id="clean">
-        <app-pre-process [rawFileContent]="rawFileContent"></app-pre-process>
+        <app-pre-process [rawFile]="rawFileContent"></app-pre-process>
       </div>
       <div role="tabpanel" class="tab-pane" id="segment">segment</div>
       <div role="tabpanel" class="tab-pane" id="cloud">cloud</div>
