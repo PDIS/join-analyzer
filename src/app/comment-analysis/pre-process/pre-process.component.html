@@ -1,6 +1,5 @@
-<!--<h2>原始檔案長度:{{rawFileContent.length}}</h2>
-<h2>實際檔案長度:{{parsedFileContent.length}}</h2>-->
-<h2>共有{{hasCommentFileContent.length}}則留言</h2>
+<!--<h2>原始檔案長度:{{rawFileContent.length}}</h2>-->
+<h2>總附議人數:{{parsedFileContent.length}}, 共有{{hasCommentFileContent.length}}則留言</h2>
 
 <hr>
 
@@ -8,5 +7,14 @@
 <app-bar-chart
     [barChartLabels]="timelineLabel"
     [barChartData]="timelineData"
+>
+</app-bar-chart>
+
+<hr>
+
+<h2>留言長度分布圖:</h2>
+<app-bar-chart
+    [barChartLabels]="commentLengthLabel"
+    [barChartData]="commentLengthData"
 >
 </app-bar-chart>

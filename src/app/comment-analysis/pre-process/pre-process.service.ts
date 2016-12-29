@@ -42,6 +42,44 @@ export class PreProcessService {
         return retVal;
     }
 
+    public static toCommentLengthLabel(parsedFileContent: Array<Comment>){
+
+        var minComment = 99999999;
+        var maxComment = 0;
+
+        parsedFileContent.forEach((comment) => {
+            minComment = (minComment < comment.comment.length) ? minComment : comment.comment.length;
+            maxComment = (maxComment > comment.comment.length) ? maxComment : comment.comment.length;
+        })
+
+        var retVal = [];
+        var current = minComment;
+
+        while (current <= maxComment) {
+            retVal.push(current);
+            current += 25;
+        }
+
+        return retVal;
+
+    }
+
+    public static toCommentLengthData(parsedFileContent: Array<Comment>,labels: Array<number>) {
+
+        var data = [];
+
+        labels[0] = 1 ;
+
+        labels.forEach((label)=>{
+            data.push(parsedFileContent.filter((comment)=>{
+                return ((comment.comment.length>=label) && (comment.comment.length<(label+50)))
+            }).length)
+        })
+
+        return data;
+
+    }
+
     private static extentDate(){
         Date.prototype['yyyy-mm-dd'] = function () {
             var mm = this.getMonth() + 1; // getMonth() is zero-based
