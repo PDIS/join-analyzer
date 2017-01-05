@@ -17,9 +17,19 @@ export class OrgSearchPipe implements PipeTransform {
           return (
             endorse.approvalOrganization.master.organizationName.indexOf(query) !== -1
             ||
-            JSON.stringify(endorse.approvalOrganization.slave).indexOf(query) !== -1
+            this.slaveOrgSearch(endorse.approvalOrganization.slave,query)
           )
         }
       });
+  }
+
+  private slaveOrgSearch(slaves,query):boolean
+  {
+    for(var i in slaves)
+    {
+      if(slaves[i].organizationName.indexOf(query) !== -1)
+        return true;
+    }
+    return false;
   }
 }

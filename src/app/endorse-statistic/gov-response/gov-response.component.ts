@@ -20,12 +20,7 @@ export class GovResponseComponent implements OnInit {
   ngOnInit() {
     this.http.get(AppConfig.endorsesJSON)
     .map((data)=>{
-      data = data.json();
-      var endorses = [];
-      for(var i in data)
-      {
-        endorses.push(data[i]);
-      }
+      var endorses = data.json();
       endorses.sort(function(a,b){
         return b.secondSignedTime - a.secondSignedTime
       })
