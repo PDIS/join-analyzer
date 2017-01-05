@@ -1,0 +1,25 @@
+<h4>主/協辦單位查詢：<input type="text" [(ngModel)]="orgQuery"></h4>
+<table class="rwd-table">
+  <tr>
+     <th>提案名稱</th>
+     <th width="160px">主辦單位</th>
+     <th width="160px">協辦單位</th>
+     <th width="100px">附議通過</th>
+     <th width="250px">回應情形</th>
+  </tr>
+  <tr *ngFor="let endorse of endorses| orgSearch:orgQuery">
+     <td data-th='提案名稱'><a href="http://join.gov.tw/idea/detail/{{endorse.id}}" target="_blank">{{endorse.title}}</a></td>
+     <td data-th='主辦單位'>{{endorse.approvalOrganization.master.organizationName}}</td>
+     <td data-th='協辦單位'>
+       <div *ngFor="let org of endorse.approvalOrganization.slave">
+         {{org.organizationName}}
+       </div>
+     </td>
+     <td data-th='附議通過'>{{endorse.secondSignedTime|date:"yyyy-MM-dd"}}</td>
+     <td data-th='回應情形'>
+       <div *ngFor="let response of endorse.govResponses">
+         {{response.organization.organizationName}} {{response.responseTime|date:"yyyy-MM-dd"}}
+       </div>
+     </td>
+  </tr>
+</table>
