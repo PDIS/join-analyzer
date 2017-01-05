@@ -20,6 +20,9 @@ export class PreProcessComponent implements OnInit, OnChanges {
   timelineLabel: Array<String> = [];
   timelineData: Array<any> = [];
 
+  commentLengthLabel: Array<any> = [];
+  commentLengthData: Array<any> = [];
+
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class PreProcessComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.rawFileContent = this.rawFile.split("\n").slice(1);
+    this.rawFileContent = this.rawFile.split("\r\n").slice(1);
 
     for (var i = 0; i < this.rawFileContent.length - 1; i++) {
       var comment = new Comment();
@@ -41,16 +44,7 @@ export class PreProcessComponent implements OnInit, OnChanges {
       comment.city2 = this.rawFileContent[i].split(",")[3];
       comment.username = this.rawFileContent[i].split(",")[4];
       comment.comment = this.rawFileContent[i].split(",")[5];
-
-      if (comment.comment.startsWith("\"") && !(this.rawFileContent[i + 1].startsWith("No."))) {
-        do {
-          i += 1;
-          comment.comment = comment.comment + ";" + this.rawFileContent[i];
-        } while (!(this.rawFileContent[i + 1].startsWith("No.")))
-      }
-
-      comment.comment = comment.comment.replace('"','').replace("\r","");
-
+      comment.comment = (comment.comment===undefined) ? "" : comment.comment.replace('"','').replace('\n','');
       this.parsedFileContent.push(comment as Comment);
     }
 
@@ -61,6 +55,19 @@ export class PreProcessComponent implements OnInit, OnChanges {
     this.timelineData.push({
       data:PreProcessService.toTimelineData(this.parsedFileContent,this.timelineLabel),
       label:"附議數"
+    })
+
+    this.commentLengthLabel = PreProcessService.toCommentLengthLabel(this.parsedFileContent);
+    this.commentLengthData.push({
+      data:PreProcessService.toCommentLengthData(this.parsedFileContent,this.commentLengthLabel),
+      label:"附議數"
+    })
+
+    this.commentLengthLabel = this.commentLengthLabel.map((value)=>{
+      if(value === 1) 
+        return "1-25";
+      else 
+        return value + "-" + (value+25);
     })
 
   }
