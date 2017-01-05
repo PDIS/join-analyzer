@@ -1,16 +1,10 @@
-<h4>請先至JOIN平台下載附議名單</h4>
-
-<p>
-    至JOIN平台找尋分析主題（如：
-    <a href="https://join.gov.tw/idea/detail/5856ba4a-be1f-4418-a7bf-25110055b24f">配合勞基法修正，政府應取消國旅卡，恢復不休假獎金</a>
-    ），並下載「附議名單」如下圖所示:
-</p>
-<img src="assets/fileDownload.PNG" alt="">
-
-<hr>
-
 <h4>請選擇「附議名單」檔案：</h4>
-<input type="file" (change)="onChange($event)"/>
+<!--<input type="file" (change)="onChange($event)"/>-->
+<select name="endorse" id="endorse" (change)="onChange($event.target)">
+    <option  *ngFor="let endorse of endorses" value="{{endorse.id}}">
+        {{endorse.secondSignedTime|date:"yyyy-MM-dd"}} {{endorse.title}}
+    </option>
+</select>
 <hr>
 <h4>檔案預覽:</h4>
 <div *ngFor="let line of preview">

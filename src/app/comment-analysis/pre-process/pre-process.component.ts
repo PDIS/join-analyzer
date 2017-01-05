@@ -2,7 +2,7 @@ import { PreProcessService } from './pre-process.service';
 import { Comment } from '../comment';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
-declare function escape(s:string): string;
+declare function escape(s: string): string;
 
 @Component({
   selector: 'app-pre-process',
@@ -12,6 +12,7 @@ declare function escape(s:string): string;
 export class PreProcessComponent implements OnInit, OnChanges {
 
   @Input() rawFile: String;
+  @Input() endorseTitle: String;
 
   rawFileContent: Array<String> = [];
   parsedFileContent: Array<Comment> = [];
@@ -30,6 +31,10 @@ export class PreProcessComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
 
+    this.rawFileContent = [];
+    this.parsedFileContent = [];
+    this.hasCommentFileContent = [];
+
     if (this.rawFile === undefined) {
       return;
     }
@@ -44,36 +49,37 @@ export class PreProcessComponent implements OnInit, OnChanges {
       comment.city2 = this.rawFileContent[i].split(",")[3];
       comment.username = this.rawFileContent[i].split(",")[4];
       comment.comment = this.rawFileContent[i].split(",")[5];
-      comment.comment = (comment.comment===undefined) ? "" : comment.comment.replace('"','').replace('\n','');
+      comment.comment = (comment.comment === undefined) ? "" : comment.comment.replace('"', '').replace('\n', '');
       this.parsedFileContent.push(comment as Comment);
     }
 
-    this.hasCommentFileContent = this.parsedFileContent.filter((comment)=>comment.comment!=="");
+    this.hasCommentFileContent = this.parsedFileContent.filter((comment) => comment.comment !== "");
 
     this.timelineLabel = PreProcessService.toTimelineLabel(this.parsedFileContent);
-
+    this.timelineData = [];
     this.timelineData.push({
-      data:PreProcessService.toTimelineData(this.parsedFileContent,this.timelineLabel),
-      label:"附議數"
+      data: PreProcessService.toTimelineData(this.parsedFileContent, this.timelineLabel),
+      label: "附議數"
     })
 
     this.commentLengthLabel = PreProcessService.toCommentLengthLabel(this.parsedFileContent);
+    this.commentLengthData = [];
     this.commentLengthData.push({
-      data:PreProcessService.toCommentLengthData(this.parsedFileContent,this.commentLengthLabel),
-      label:"附議數"
+      data: PreProcessService.toCommentLengthData(this.parsedFileContent, this.commentLengthLabel),
+      label: "附議數"
     })
 
-    this.commentLengthLabel = this.commentLengthLabel.map((value)=>{
-      if(value === 1) 
+    this.commentLengthLabel = this.commentLengthLabel.map((value) => {
+      if (value === 1)
         return "1-25";
-      else 
-        return value + "-" + (value+25);
+      else
+        return value + "-" + (value + 25);
     })
 
   }
 
   downloadJSON() {
-     window.open("data:text/json;charset=utf-8," + escape(JSON.stringify(this.parsedFileContent))) 
+    window.open("data:text/json;charset=utf-8," + escape(JSON.stringify(this.parsedFileContent)))
   }
 
 }

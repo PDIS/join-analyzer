@@ -1,8 +1,5 @@
 <div class="container">
   <h1>附議留言分析</h1>
-  <p>
-    留言需要被分析 囧
-  </p>
   <div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -22,10 +19,10 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="select">
-        <app-select-file (getFileContent)="getRawFileContent($event)"></app-select-file>
+        <app-select-file (getFileContent)="getRawFileContent($event)" (getEndorseTitle)="getEndorseTitle($event)"></app-select-file>
       </div>
       <div role="tabpanel" class="tab-pane" id="clean">
-        <app-pre-process [rawFile]="rawFileContent"></app-pre-process>
+        <app-pre-process [rawFile]="rawFileContent" [endorseTitle]="endorseTitle"></app-pre-process>
       </div>
       <div role="tabpanel" class="tab-pane" id="segment">segment</div>
       <div role="tabpanel" class="tab-pane" id="cloud">cloud</div>

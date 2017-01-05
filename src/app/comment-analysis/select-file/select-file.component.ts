@@ -1,4 +1,8 @@
-import {EventEmitter} from '@angular/core/src/facade/async';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import { AppConfig } from './../../app.config';
+import { Http } from '@angular/http';
+import { EventEmitter } from '@angular/core/src/facade/async';
 import { Component, OnInit, Output, } from '@angular/core';
 
 @Component({
@@ -9,27 +13,40 @@ import { Component, OnInit, Output, } from '@angular/core';
 export class SelectFileComponent implements OnInit {
 
   @Output() getFileContent = new EventEmitter();
+  @Output() getEndorseTitle = new EventEmitter();
 
-  private preview : Array<String>;
+  private endorses: Array<Object> = [];
+  private preview: Array<String>;
 
-  constructor() { }
+  constructor(private http: Http) { }
 
-  onChange(event) {
-    var self = this;
-    var files = event.srcElement.files;
-    var file = files[0];
-    var fileContent = ""
-    if (file) {
-      var reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = function (e) {
-        self.preview = this.result.split("\n").slice(0,6);
-        self.getFileContent.emit(this.result);
-      }
-    }
+  onChange(endorse) {
+
+    this.getEndorseTitle.emit(endorse.options[endorse.selectedIndex].innerText);
+    
+    this.http.get(AppConfig.suggestionCSV + endorse.value + ".csv")
+      .map((data)=>{
+        data = data['_body'];
+        return data.toString();
+      })
+      .subscribe((data) => {
+        this.preview = data.split("\n").slice(0,10);
+        this.getFileContent.emit(data);
+      });
   }
 
   ngOnInit() {
+    this.http.get(AppConfig.endorsesJSON)
+      .map((data) => {
+        var endorses = data.json();
+        endorses.sort(function (a, b) {
+          return b.secondSignedTime - a.secondSignedTime
+        })
+        return endorses;
+      })
+      .subscribe((endorses) => {
+        this.endorses = endorses;
+      })
   }
 
 }

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CommentAnalysisComponent implements OnInit {
 
   private rawFileContent: String;
+  private endorseTitle: String;
 
   constructor() { }
 
@@ -16,6 +17,10 @@ export class CommentAnalysisComponent implements OnInit {
 
   getRawFileContent(file) {
     this.rawFileContent = file;
+  }
+
+  getEndorseTitle(title) {
+    this.endorseTitle = title;
   }
 
 }
