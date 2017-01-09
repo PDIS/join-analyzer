@@ -18,7 +18,7 @@ export class GovResponseComponent implements OnInit {
   constructor(private http: Http) { }
   
   ngOnInit() {
-    this.http.get(AppConfig.endorsesJSON)
+    this.http.get(AppConfig.CompletedEndorsesJSON)
     .map((data)=>{
       var endorses = data.json();
       endorses.sort(function(a,b){

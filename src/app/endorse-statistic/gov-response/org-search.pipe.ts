@@ -9,8 +9,9 @@ export class OrgSearchPipe implements PipeTransform {
       return endorses;
     else
       return endorses.filter((endorse) => {
-        console.log(endorse)
-        if(endorse.approvalOrganization.master === "" && endorse.approvalOrganization.slave === ""){
+        // console.log(endorse)
+        if (endorse.approvalOrganization.master === "")
+        {
           return false
         }
         else{
