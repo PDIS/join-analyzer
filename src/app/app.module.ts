@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { EndorseStatisticComponent } from './endorse-statistic/endorse-statistic.component';
 import { GovResponseComponent } from './endorse-statistic/gov-response/gov-response.component';
 import { OrgSearchPipe } from './endorse-statistic/gov-response/org-search.pipe';
+import { EndorsingComponent } from './endorse-statistic/endorsing/endorsing.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OrgSearchPipe } from './endorse-statistic/gov-response/org-search.pipe'
     BarChartComponent,
     EndorseStatisticComponent,
     GovResponseComponent,
-    OrgSearchPipe
+    OrgSearchPipe,
+    EndorsingComponent
   ],
   imports: [
     ChartsModule,
