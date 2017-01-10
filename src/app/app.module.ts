@@ -17,6 +17,8 @@ import { EndorseStatisticComponent } from './endorse-statistic/endorse-statistic
 import { GovResponseComponent } from './endorse-statistic/gov-response/gov-response.component';
 import { OrgSearchPipe } from './endorse-statistic/gov-response/org-search.pipe';
 import { EndorsingComponent } from './endorse-statistic/endorsing/endorsing.component';
+import { HideHistoryPipe } from './endorse-statistic/gov-response/hide-history.pipe';
+import { HideResponsedPipe } from './endorse-statistic/gov-response/hide-responsed.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { EndorsingComponent } from './endorse-statistic/endorsing/endorsing.comp
     EndorseStatisticComponent,
     GovResponseComponent,
     OrgSearchPipe,
-    EndorsingComponent
+    EndorsingComponent,
+    HideHistoryPipe,
+    HideResponsedPipe
   ],
   imports: [
     ChartsModule,

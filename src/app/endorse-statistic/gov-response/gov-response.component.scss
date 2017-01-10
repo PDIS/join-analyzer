@@ -42,7 +42,7 @@
     font-weight: bold;
 }
 
-@media (min-width: 991px) {
+@media (min-width: 992px) {
     .rwd-table td:before {
         display: none;
     }
@@ -63,4 +63,16 @@
     .rwd-table td {
         padding: 1em !important;
     }
+}
+
+.red {
+    color: red;
+}
+
+.bg-pink{
+    background: pink !important; 
+}
+
+.bg-red{
+    background: red !important; 
 }

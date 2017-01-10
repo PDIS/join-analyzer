@@ -14,6 +14,10 @@ export class GovResponseComponent implements OnInit {
 
   private endorses:Array<Object> = [];
   private orgQuery = "";
+  private now = new Date();
+  private hideHistory = true;
+  private modal = {};
+  private nullResponse = false;
 
   constructor(private http: Http) { }
   
@@ -29,6 +33,18 @@ export class GovResponseComponent implements OnInit {
     .subscribe((endorses)=>{
       this.endorses = endorses;
     })
+    this.modal['title'] = "";
+    this.modal['analysis'] = "";
+    this.modal['plan'] = "";
+    this.modal['reference'] = "";
+  }
+
+  showResponse(title,time,analysis,suggest,reference,plan){
+    this.modal['title'] = title + " " + new Date(time).toLocaleDateString();;
+    this.modal['analysis'] = analysis;
+    this.modal['suggest'] = suggest;
+    this.modal['plan'] = plan;
+    this.modal['reference'] = reference;
   }
 
 }
