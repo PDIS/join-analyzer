@@ -15,16 +15,17 @@ export class SelectFileComponent implements OnInit {
   @Output() getFileContent = new EventEmitter();
   @Output() getEndorseTitle = new EventEmitter();
 
-  private endorses: Array<Object> = [];
+  private completedEndorses: Array<Object> = [];
+  private endorsingEndorses: Array<Object> = [];
   private preview: Array<String>;
 
   constructor(private http: Http) { }
 
-  onChange(endorse) {
+  onChange(endorse,type) {
 
     this.getEndorseTitle.emit(endorse.options[endorse.selectedIndex].innerText);
     
-    this.http.get(AppConfig.suggestionCSV + endorse.value + ".csv")
+    this.http.get(AppConfig.suggestionCSV + type + '/' + endorse.value + ".csv")
       .map((data)=>{
         data = data['_body'];
         return data.toString();
@@ -45,7 +46,19 @@ export class SelectFileComponent implements OnInit {
         return endorses;
       })
       .subscribe((endorses) => {
-        this.endorses = endorses;
+        this.completedEndorses = endorses;
+      })
+
+    this.http.get(AppConfig.EndorsingJSON)
+      .map((data) => {
+        var endorses = data.json();
+        endorses.sort(function(a,b){
+          return b.endorseCount - a.endorseCount
+        })
+        return endorses;
+      })
+      .subscribe((endorses) => {
+        this.endorsingEndorses = endorses;
       })
   }
 
