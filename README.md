@@ -1,18 +1,9 @@
-Development Environment Setup
------------------------------
+# join-archive
+利用 phantomjs 下載所有「附議通過」的提案內容及附議名單
 
--   fork this project on github
--   install [nodejs](https://nodejs.org/en/) [npm](https://www.npmjs.com/) [angular-cli](https://cli.angular.io/)
--   ```npm install```
--   ```npm start```
--   Navigate to [http://localhost:4200/](http://localhost:4200/). The app will automatically reload if you change any of the source files.
+# How to run
+ -   install phantomjs & curl
+ -   `phantomjs Crawler_Completed.js`
 
-Data Source Reference
----------------------
-
--   [https://github.com/PDIS/join-archive](https://github.com/PDIS/join-archive)
-
-Deploy
-------
-
--   ```npm run deploy```
+# Update to github
+ -   sh update.sh
