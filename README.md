@@ -1,9 +1,13 @@
-# join-archive
-利用 phantomjs 下載所有「附議通過」的提案內容及附議名單
+# Generic & Simple Example
 
-# How to run
- -   install phantomjs & curl
- -   `phantomjs Crawler_Completed.js`
+The simplest possible example of a prerendered static site, using JavaScript with no external libraries.
 
-# Update to github
- -   sh update.sh
+## Usage
+
+```
+cd path/to/examples/generic-simple
+npm install
+npm run build
+```
+
+Now check the new `dist` directory for your prerendered static site! You'll notice that the initial todos have been prerendered on the page.
