@@ -18,7 +18,8 @@ export class EndorsingComponent implements OnInit {
   ngOnInit() {
     this.http.get(AppConfig.EndorsingJSON)
     .map((data)=>{
-      var endorses = data.json();
+      var endorses = data.json().filter(a=>a.endorseCount<5000);
+
       endorses.sort(function(a,b){
         return b.endorseCount - a.endorseCount
       })
